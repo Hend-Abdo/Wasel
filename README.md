@@ -2,28 +2,36 @@
 
 Wasel is an early-stage AI-assisted operations platform for Egyptian wholesale and distribution companies.
 
-## What this first milestone contains
-- React + Vite frontend prototype with interactive navigation and realistic sample data.
-- ASP.NET Core API starter structure (not yet connected to a database).
-- Product brief, MVP scope, architecture notes, and a Claude handoff guide.
-- Arabic-first RTL interface with an English/Arabic-friendly structure.
+## Current repository structure
 
-## Important
-This is a working frontend prototype using sample data. It is **not** connected to a real company, ERP, database, or AI model yet. Do not use its sample numbers for business decisions.
+- `src/`: React + Vite frontend source.
+- `backend/Wasel.Api/`: ASP.NET Core 8 Web API starter.
+- `PRODUCT_BRIEF.md`: MVP scope and product direction.
+- `ARCHITECTURE.md`: current and planned technical architecture.
+- `CLAUDE.md`: product and implementation rules for coding assistants.
+
+## Current milestone
+
+The frontend is a prototype using clearly labelled sample data. The API currently exposes a health endpoint only. The project is **not** connected to a real company, ERP, database, or AI model. Do not use sample figures for business decisions.
 
 ## Run the frontend
+
 Requirements: Node.js 20+.
 
+From the repository root:
+
 ```bash
-cd frontend
 npm install
 npm run dev
 ```
 
 Open the local URL printed by Vite.
 
-## Backend
-The API starter targets .NET 8. Install the .NET 8 SDK, then:
+## Run the backend
+
+Requirements: .NET 8 SDK.
+
+From the repository root:
 
 ```bash
 cd backend/Wasel.Api
@@ -31,7 +39,8 @@ dotnet restore
 dotnet run
 ```
 
-The current API starter exposes a health endpoint only. Database, authentication, and integrations are planned, not implemented.
+The health endpoint is available at `/api/health`. Database, authentication, file import, and integrations are planned, not implemented.
 
 ## Product direction
-Start with a focused workflow: inventory risk and demand visibility for distributors. Expand only after validating workflows with real operators.
+
+Start with a focused workflow: inventory risk and demand visibility for distributors. Expand only after validating the workflow with real operators.
