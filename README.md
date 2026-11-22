@@ -27,7 +27,7 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:5173. The dev server is pinned to this port because the API's CORS policy only allows this origin; if the port is already in use, Vite exits with an error instead of switching ports.
+Open http://localhost:5173. The dev server is pinned to this port because the API's CORS policy only allows this exact origin; if the port is already in use, Vite exits with an error instead of switching ports. Open the app at `localhost`, not `127.0.0.1`: browsers treat `http://127.0.0.1:5173` as a different origin and block its requests to the API.
 
 To check that the production build works:
 
@@ -47,7 +47,13 @@ dotnet restore
 dotnet run
 ```
 
-Use the URL printed in the console. The health endpoint is available at `/api/health`. Swagger UI is only enabled when `ASPNETCORE_ENVIRONMENT` is `Development`; the project has no `launchSettings.json`, so set it yourself if you need Swagger, for example `ASPNETCORE_ENVIRONMENT=Development dotnet run` (macOS/Linux). To check that the project compiles:
+There is no `launchSettings.json` or URL configuration, so the API listens on `http://localhost:5000` (HTTP only) in the Production environment by default. Check it with:
+
+```bash
+curl http://localhost:5000/api/health
+```
+
+Swagger UI is only enabled when `ASPNETCORE_ENVIRONMENT` is `Development`; the project has no `launchSettings.json`, so set it yourself if you need Swagger, for example `ASPNETCORE_ENVIRONMENT=Development dotnet run` (macOS/Linux). To check that the project compiles:
 
 ```bash
 dotnet build
