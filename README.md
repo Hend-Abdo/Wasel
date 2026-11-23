@@ -4,13 +4,14 @@ Wasel is an early-stage AI-assisted operations platform for Egyptian wholesale a
 
 ## Current repository structure
 
-- `index.html`, `package.json`, `vite.config.js`: React + Vite frontend entry and configuration (repository root).
-- `src/`: React frontend source.
+- `frontend/`: React + Vite frontend (`index.html`, `package.json`, `package-lock.json`, `vite.config.js`, `src/`).
 - `backend/Wasel.Api/`: ASP.NET Core 8 Web API starter.
-- `PRODUCT_BRIEF.md`: MVP scope and product direction.
-- `ARCHITECTURE.md`: current and planned technical architecture.
-- `CLAUDE.md`: product and implementation rules for coding assistants.
-- `CLAUDE_FIRST_TASK.md`: initial review brief for coding assistants.
+- `docs/`: project documentation.
+  - [`docs/PRODUCT_BRIEF.md`](docs/PRODUCT_BRIEF.md): MVP scope and product direction.
+  - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md): current and planned technical architecture.
+  - [`docs/CLAUDE_FIRST_TASK.md`](docs/CLAUDE_FIRST_TASK.md): initial review brief for coding assistants.
+- `CLAUDE.md`: product and implementation rules for coding assistants (kept in the repository root).
+- `.github/workflows/ci.yml`: CI that builds the frontend (in `frontend/`) and the backend (in `backend/Wasel.Api/`).
 
 ## Current milestone
 
@@ -23,13 +24,14 @@ Requirements: Node.js 20.19+ or 22.12+ (required by Vite 8).
 From the repository root:
 
 ```bash
+cd frontend
 npm install
 npm run dev
 ```
 
 Open http://localhost:5173. The dev server is pinned to this port because the API's CORS policy only allows this exact origin; if the port is already in use, Vite exits with an error instead of switching ports. Open the app at `localhost`, not `127.0.0.1`: browsers treat `http://127.0.0.1:5173` as a different origin and block its requests to the API.
 
-To check that the production build works:
+To check that the production build works (from `frontend/`):
 
 ```bash
 npm run build
