@@ -2,17 +2,27 @@
 
 Wasel is an early-stage AI-assisted operations platform for Egyptian wholesale and distribution companies.
 
-## What this first milestone contains
-- React + Vite frontend prototype with interactive navigation and realistic sample data.
-- ASP.NET Core API starter structure (not yet connected to a database).
-- Product brief, MVP scope, architecture notes, and a Claude handoff guide.
-- Arabic-first RTL interface with an English/Arabic-friendly structure.
+## Current repository structure
 
-## Important
-This is a working frontend prototype using sample data. It is **not** connected to a real company, ERP, database, or AI model yet. Do not use its sample numbers for business decisions.
+- `frontend/`: React + Vite frontend (`index.html`, `package.json`, `package-lock.json`, `vite.config.js`, `src/`).
+- `backend/Wasel.Api/`: ASP.NET Core 8 Web API starter.
+- `docs/`: project documentation.
+  - [`docs/PRODUCT_BRIEF.md`](docs/PRODUCT_BRIEF.md): MVP scope and product direction.
+  - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md): current and planned technical architecture.
+  - [`docs/DATABASE_DESIGN.md`](docs/DATABASE_DESIGN.md): proposed SQL Server database design for the MVP (draft for review, not implemented).
+  - [`docs/CLAUDE_FIRST_TASK.md`](docs/CLAUDE_FIRST_TASK.md): initial review brief for coding assistants.
+- `CLAUDE.md`: product and implementation rules for coding assistants (kept in the repository root).
+- `.github/workflows/ci.yml`: CI that builds the frontend (in `frontend/`) and the backend (in `backend/Wasel.Api/`).
+
+## Current milestone
+
+The frontend is a prototype using clearly labelled sample data; it does not call the API yet. The API currently exposes a health endpoint only. The project is **not** connected to a real company, ERP, database, or AI model. Do not use sample figures for business decisions.
 
 ## Run the frontend
-Requirements: Node.js 20+.
+
+Requirements: Node.js 20.19+ or 22.12+ (required by Vite 8).
+
+From the repository root:
 
 ```bash
 cd frontend
@@ -20,10 +30,19 @@ npm install
 npm run dev
 ```
 
-Open the local URL printed by Vite.
+Open http://localhost:5173. The dev server is pinned to this port because the API's CORS policy only allows this exact origin; if the port is already in use, Vite exits with an error instead of switching ports. Open the app at `localhost`, not `127.0.0.1`: browsers treat `http://127.0.0.1:5173` as a different origin and block its requests to the API.
 
-## Backend
-The API starter targets .NET 8. Install the .NET 8 SDK, then:
+To check that the production build works (from `frontend/`):
+
+```bash
+npm run build
+```
+
+## Run the backend
+
+Requirements: .NET 8 SDK.
+
+From the repository root:
 
 ```bash
 cd backend/Wasel.Api
@@ -31,7 +50,20 @@ dotnet restore
 dotnet run
 ```
 
-The current API starter exposes a health endpoint only. Database, authentication, and integrations are planned, not implemented.
+There is no `launchSettings.json` or URL configuration, so the API listens on `http://localhost:5000` (HTTP only) in the Production environment by default. Check it with:
+
+```bash
+curl http://localhost:5000/api/health
+```
+
+Swagger UI is only enabled when `ASPNETCORE_ENVIRONMENT` is `Development`; the project has no `launchSettings.json`, so set it yourself if you need Swagger, for example `ASPNETCORE_ENVIRONMENT=Development dotnet run` (macOS/Linux). To check that the project compiles:
+
+```bash
+dotnet build
+```
+
+The first restore needs access to NuGet (it downloads `Swashbuckle.AspNetCore`). Database, authentication, file import, and integrations are planned, not implemented.
 
 ## Product direction
-Start with a focused workflow: inventory risk and demand visibility for distributors. Expand only after validating workflows with real operators.
+
+Start with a focused workflow: inventory risk and demand visibility for distributors. Expand only after validating the workflow with real operators.
