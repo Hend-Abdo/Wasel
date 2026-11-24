@@ -9,6 +9,7 @@ Wasel is an early-stage AI-assisted operations platform for Egyptian wholesale a
 - `docs/`: project documentation.
   - [`docs/PRODUCT_BRIEF.md`](docs/PRODUCT_BRIEF.md): MVP scope and product direction.
   - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md): current and planned technical architecture.
+  - [`docs/DATABASE_DESIGN.md`](docs/DATABASE_DESIGN.md): proposed SQL Server database design for the MVP (draft for review, not implemented).
   - [`docs/CLAUDE_FIRST_TASK.md`](docs/CLAUDE_FIRST_TASK.md): initial review brief for coding assistants.
 - `CLAUDE.md`: product and implementation rules for coding assistants (kept in the repository root).
 - `.github/workflows/ci.yml`: CI that builds the frontend (in `frontend/`) and the backend (in `backend/Wasel.Api/`).
